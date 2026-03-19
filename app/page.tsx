@@ -12,6 +12,7 @@ import {
 import type { CSSProperties } from "react";
 import type { Group } from "three";
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader.js";
+import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 
 type Project = {
 	title: string;
@@ -88,9 +89,10 @@ function Model({ scale, spin }: { scale: number; spin: number }) {
 		return loader;
 	}, [gl]);
 
-	const { scene } = useGLTF("/output.glb", false, false, loader =>
-		loader.setKTX2Loader(ktx2Loader as any),
-	);
+	const { scene } = useGLTF("/output.glb", false, false, loader => {
+		loader.setKTX2Loader(ktx2Loader as any);
+		loader.setMeshoptDecoder(MeshoptDecoder);
+	});
 
 	useEffect(() => {
 		return () => {
