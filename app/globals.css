@@ -1,26 +1,249 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #030712;
+  --foreground: #f8fafc;
+  --deep-space: #040818;
+  --space-surface: rgba(12, 18, 42, 0.74);
+  --space-border: rgba(255, 255, 255, 0.14);
+  --muted: #bfccff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-space-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-space-grotesk), sans-serif;
+  margin: 0;
+}
+
+.portfolio-root {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+  padding: clamp(2.4rem, 5vw, 4.5rem);
+  background:
+    radial-gradient(circle at 10% 10%, #102043 0%, transparent 42%),
+    radial-gradient(circle at 85% 5%, #291344 0%, transparent 38%),
+    linear-gradient(180deg, #02030a 0%, #040818 45%, #071633 100%);
+}
+
+.galaxy-backdrop {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    radial-gradient(2px 2px at 16% 24%, rgba(255, 255, 255, 0.95) 15%, transparent 60%),
+    radial-gradient(2px 2px at 72% 48%, rgba(183, 198, 255, 0.95) 20%, transparent 62%),
+    radial-gradient(1px 1px at 38% 68%, rgba(255, 255, 255, 0.8) 20%, transparent 70%),
+    radial-gradient(1px 1px at 56% 21%, rgba(252, 211, 77, 0.65) 18%, transparent 65%),
+    radial-gradient(1px 1px at 88% 88%, rgba(255, 255, 255, 0.8) 16%, transparent 70%);
+  opacity: 0.48;
+  animation: drift 24s linear infinite;
+}
+
+.hero-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 58rem;
+  margin: 0 auto clamp(2.5rem, 6vw, 5rem);
+  text-align: center;
+  animation: rise-in 0.9s ease-out;
+}
+
+.hero-kicker {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+  font-weight: 700;
+  margin-bottom: 0.9rem;
+  font-size: 0.78rem;
+}
+
+.hero-title {
+  font-family: var(--font-space-mono), monospace;
+  font-size: clamp(2rem, 5vw, 4.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin-bottom: 1rem;
+}
+
+.hero-description {
+  color: var(--muted);
+  font-size: clamp(1rem, 2.1vw, 1.25rem);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.projects-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(2.2rem, 4vw, 3rem);
+  width: min(1150px, 100%);
+  margin: 0 auto;
+}
+
+.project-card {
+  display: grid;
+  grid-template-columns: 0.9fr 1.35fr;
+  gap: clamp(1.3rem, 3vw, 2.3rem);
+  align-items: stretch;
+  border: 1px solid var(--space-border);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(130deg, rgba(29, 38, 77, 0.44), rgba(9, 13, 30, 0.58)),
+    var(--space-surface);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(11px);
+  padding: clamp(1.1rem, 2vw, 1.6rem);
+}
+
+.project-card:nth-child(even) {
+  grid-template-columns: 1.35fr 0.9fr;
+}
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-index {
+  margin-bottom: 0.6rem;
+  color: #93c5fd;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.project-title {
+  font-size: clamp(1.6rem, 3.6vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 0.45rem;
+}
+
+.project-tagline {
+  color: #e2e8f0;
+  opacity: 0.92;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+}
+
+.project-description {
+  color: #cdd8ff;
+  line-height: 1.62;
+  margin-bottom: 1.1rem;
+}
+
+.skills-heading {
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #93c5fd;
+  margin-bottom: 0.6rem;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-pill {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  padding: 0.38rem 0.74rem;
+  font-size: 0.84rem;
+  color: #f8fafc;
+  background: rgba(4, 7, 19, 0.55);
+}
+
+.project-canvas {
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 100%;
+  min-width: max(25vw, 360px);
+  min-height: max(25vh, 360px);
+  height: clamp(360px, 34vh, 520px);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 60px color-mix(in srgb, var(--accent) 26%, transparent);
+}
+
+.portfolio-footer {
+  position: relative;
+  z-index: 1;
+  margin: clamp(3rem, 9vw, 6rem) auto 0;
+  width: min(1150px, 100%);
+  text-align: center;
+  color: #a3b5ed;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.73rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 950px) {
+  .project-card,
+  .project-card:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .project-canvas {
+    order: -1;
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .portfolio-root {
+    padding: 1.2rem;
+  }
+
+  .hero-shell {
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  .hero-title {
+    line-height: 1.12;
+  }
+
+  .project-card {
+    border-radius: 0.95rem;
+    padding: 0.95rem;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-18px);
+  }
 }
