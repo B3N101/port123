@@ -88,7 +88,7 @@ function Model({ scale, spin }: { scale: number; spin: number }) {
 		return loader;
 	}, [gl]);
 
-	const { scene } = useGLTF("/output2.glb", false, false, loader =>
+	const { scene } = useGLTF("/output.glb", false, false, loader =>
 		loader.setKTX2Loader(ktx2Loader as any),
 	);
 
