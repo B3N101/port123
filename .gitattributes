@@ -4,3 +4,4 @@ public/output2.glb filter=lfs diff=lfs merge=lfs -text
 public/output3.glb filter=lfs diff=lfs merge=lfs -text
 public/robot.glb filter=lfs diff=lfs merge=lfs -text
 public/robotOpt.glb filter=lfs diff=lfs merge=lfs -text
+public/*.exr filter=lfs diff=lfs merge=lfs -text

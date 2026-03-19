@@ -2,7 +2,13 @@
 
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Center, Html, OrbitControls, useGLTF } from "@react-three/drei";
+import {
+	Center,
+	Environment,
+	Html,
+	OrbitControls,
+	useGLTF,
+} from "@react-three/drei";
 
 function Loader() {
 	return <Html center>Loading robot.glb...</Html>;
@@ -27,6 +33,10 @@ function SceneCanvas() {
 			<ambientLight intensity={0.8} />
 			<directionalLight position={[2, 3, 2]} intensity={1.6} />
 			<Suspense fallback={<Loader />}>
+				<Environment
+					files="/background.exr"
+					background={false}
+				/>
 				<Model />
 			</Suspense>
 			<OrbitControls enablePan={false} />
