@@ -1,41 +1,15 @@
 "use client";
 
-import { Suspense, useEffect, useMemo } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
 import { Center, Html, OrbitControls, useGLTF } from "@react-three/drei";
-import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader.js";
-import { REVISION } from "three";
-
-const THREE_PATH = `https://unpkg.com/three@0.${REVISION}.x/examples/jsm`;
-
-type GltfLoaderWithKtx2 = {
-	setKTX2Loader(loader: KTX2Loader): void;
-};
 
 function Loader() {
-	return <Html center>Loading output.glb...</Html>;
+	return <Html center>Loading robot.glb...</Html>;
 }
 
 function Model() {
-	const { gl } = useThree();
-
-	const ktx2Loader = useMemo(() => {
-		const loader = new KTX2Loader().setTranscoderPath(
-			`${THREE_PATH}/libs/basis/`,
-		);
-		loader.detectSupport(gl);
-		return loader;
-	}, [gl]);
-
-	const { scene } = useGLTF("/output.glb", false, false, loader => {
-		(loader as unknown as GltfLoaderWithKtx2).setKTX2Loader(ktx2Loader);
-	});
-
-	useEffect(() => {
-		return () => {
-			ktx2Loader.dispose();
-		};
-	}, [ktx2Loader]);
+	const { scene } = useGLTF("/robot.glb");
 
 	return (
 		<Center>
@@ -43,6 +17,8 @@ function Model() {
 		</Center>
 	);
 }
+
+useGLTF.preload("/robot.glb");
 
 function SceneCanvas() {
 	return (
@@ -77,7 +53,7 @@ export default function Home() {
 				<p className="hero-kicker">Ben Feuer</p>
 				<h1 className="hero-title">Simple GLB Visualizer</h1>
 				<p className="hero-description">
-					A minimal React Three Fiber setup for output.glb with basic lighting,
+					A minimal React Three Fiber setup for robot.glb with basic lighting,
 					loader fallback, and orbit controls.
 				</p>
 			</section>
@@ -86,11 +62,11 @@ export default function Home() {
 				<article className="project-card">
 					<div className="project-meta">
 						<p className="project-index">Model</p>
-						<h2 className="project-title">output.glb</h2>
+						<h2 className="project-title">robot.glb</h2>
 						<p className="project-tagline">React Three Fiber + drei</p>
 						<p className="project-description">
-							This version intentionally removes advanced loader/environment
-							configuration and focuses on a straightforward GLB viewer.
+							This version uses a standard non-KTX GLB pipeline for reliable
+							browser loading and a straightforward viewer setup.
 						</p>
 					</div>
 					<ProjectCanvas />
