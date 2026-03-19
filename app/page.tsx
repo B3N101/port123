@@ -13,7 +13,7 @@ type GltfLoaderWithKtx2 = {
 };
 
 function Loader() {
-	return <Html center>Loading output2.glb...</Html>;
+	return <Html center>Loading output.glb...</Html>;
 }
 
 function Model() {
@@ -27,7 +27,7 @@ function Model() {
 		return loader;
 	}, [gl]);
 
-	const { scene } = useGLTF("/output2.glb", false, false, loader => {
+	const { scene } = useGLTF("/output.glb", false, false, loader => {
 		(loader as unknown as GltfLoaderWithKtx2).setKTX2Loader(ktx2Loader);
 	});
 
@@ -77,7 +77,7 @@ export default function Home() {
 				<p className="hero-kicker">Ben Feuer</p>
 				<h1 className="hero-title">Simple GLB Visualizer</h1>
 				<p className="hero-description">
-					A minimal React Three Fiber setup for output2.glb with basic lighting,
+					A minimal React Three Fiber setup for output.glb with basic lighting,
 					loader fallback, and orbit controls.
 				</p>
 			</section>
@@ -86,7 +86,7 @@ export default function Home() {
 				<article className="project-card">
 					<div className="project-meta">
 						<p className="project-index">Model</p>
-						<h2 className="project-title">output2.glb</h2>
+						<h2 className="project-title">output.glb</h2>
 						<p className="project-tagline">React Three Fiber + drei</p>
 						<p className="project-description">
 							This version intentionally removes advanced loader/environment
