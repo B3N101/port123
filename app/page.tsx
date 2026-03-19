@@ -11,11 +11,11 @@ import {
 } from "@react-three/drei";
 
 function Loader() {
-	return <Html center>Loading robot.glb...</Html>;
+	return <Html center>Loading robot-web.glb...</Html>;
 }
 
 function Model() {
-	const { scene } = useGLTF("/robot.glb");
+	const { scene } = useGLTF("/robot-web.glb");
 
 	return (
 		<Center>
@@ -24,7 +24,7 @@ function Model() {
 	);
 }
 
-useGLTF.preload("/robot.glb");
+useGLTF.preload("/robot-web.glb");
 
 function SceneCanvas() {
 	return (
@@ -63,7 +63,7 @@ export default function Home() {
 				<p className="hero-kicker">Ben Feuer</p>
 				<h1 className="hero-title">Simple GLB Visualizer</h1>
 				<p className="hero-description">
-					A minimal React Three Fiber setup for robot.glb with basic lighting,
+					A minimal React Three Fiber setup for robot-web.glb with basic lighting,
 					loader fallback, and orbit controls.
 				</p>
 			</section>
@@ -72,10 +72,10 @@ export default function Home() {
 				<article className="project-card">
 					<div className="project-meta">
 						<p className="project-index">Model</p>
-						<h2 className="project-title">robot.glb</h2>
+						<h2 className="project-title">robot-web.glb</h2>
 						<p className="project-tagline">React Three Fiber + drei</p>
 						<p className="project-description">
-							This version uses a standard non-KTX GLB pipeline for reliable
+							This version uses a deploy-safe non-LFS GLB runtime pipeline for
 							browser loading and a straightforward viewer setup.
 						</p>
 					</div>
